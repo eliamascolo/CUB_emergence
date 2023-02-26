@@ -36,7 +36,21 @@ class Genome():
         self.fitness = None
     
     def assign_codons_evenly(self):
+        '''
+        Synonymous codons are represented as evenly as possible.
+        n_aa_occurences:
+            the number of times the a.a. is present
+        n_codon_types:
+            the number of synonymous codons by which the a.a. can be encoded
+        The function sets the `codon_counts` attribute.
+        self.codon_counts:
+            A list containing the number of instances for each codon type.
+            Therefore,
+            len(self.codon_counts) == self.n_codon_types
+            and
+            sum(self.codon_counts) == self.n_aa_occurences
         
+        '''
         quotient = self.n_aa_occurences // self.n_codon_types
         remainder = self.n_aa_occurences % self.n_codon_types
         
@@ -48,7 +62,12 @@ class Genome():
         self.codon_counts = counts
     
     def assign_tRNAs_abundances_evenly(self):
-        
+        '''
+        Sets the abundances of tRNAs recognizing synonymous codons to equal
+        values. The function sets the `trna_abundances` attribute.
+        self.trna_abundances:
+            A list containing the abundance value for each tRNA type.
+        '''
         n_tRNAs = self.n_codon_types
         
         # Each tRNA will have a frequency equal to freq
@@ -71,7 +90,10 @@ class Genome():
             self.mutate_codon()
     
     def mutate_codon(self):
-        
+        '''
+        Produces a synonymous mutation, changing one random condon into a
+        synonymous codon.
+        '''
         donor, acceptor = random.sample(range(self.n_codon_types), 2)
         
         if self.codon_counts[donor] > 0:
@@ -172,19 +194,16 @@ class Genome():
 
 
 
-
-
-
-def read_json_file(filename: str) -> dict:
-
+def read_json_file(filename):
     with open(filename) as json_content:
-
         return json.load(json_content)
 
 
 
 config_dictionary = read_json_file('config.json')
 
+
+# TEST SPACE
 
 new_genome = Genome(config_dictionary)
 new_genome.assign_codons_evenly()
