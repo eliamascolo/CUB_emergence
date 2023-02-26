@@ -1,0 +1,9 @@
+{
+	"number_of_synonymous_codons" : 2,
+	"number_of_aa_occurences_in_genome" : 100000,
+	"wait_time_cost_param" : 0.1,
+	"max_trna_freq_shift" : 0.01,
+	"trna_freq_lower_bound" : 1e-5,
+	"max_error_trna_freq_sum" : 1e-6,
+	"mutate_trna_probability" : 0.001
+}
